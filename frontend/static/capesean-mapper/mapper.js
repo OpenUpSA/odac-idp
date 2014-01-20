@@ -188,7 +188,10 @@ $(function () {
                         html: item.html,
                         // include these properties so the click event handler can access them
                         dataType: this.options.dataType,
-                        id: item.id
+                        id: item.id,
+                        ward_no: item.ward_no,
+                        councillor: item.councillor,
+                        description: item.description
                     });
 
                     // set on map

@@ -23,7 +23,9 @@
     </div>
     <div class="row">
         <div class="col-lg-4">
+            <div id="info-box">
 
+            </div>
         </div>
         <div class="col-lg-8">
             <div id="map-container">
@@ -63,10 +65,11 @@
             data: wards,
             province: "Western Cape",
             click: function (event) {
-                alert("I was clicked!\n"
-                        + "I am: " + this.id + "\n"
-                        + "I am one of the: " + this.dataType + "\n"
-                        + "The time of the clicking was: " + (new Date()).toString());
+                var tmp =
+                        "<h4>Ward No. " + this.ward_no + "</h4>"
+                        + "<p><strong>Councillor: " + this.councillor + "</strong><br>"
+                        + this.description + "</p>"
+                $("#info-box").html(tmp)
             }
         })
     });

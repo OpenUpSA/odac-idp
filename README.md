@@ -3,6 +3,7 @@ odac-idp
 
 Demo Web application for browsing through information relating to the government's numerous Integrated Development Plans.
 
+Access the application at: http://ec2-54-194-218-89.eu-west-1.compute.amazonaws.com
 
 NOTES:
 ------
