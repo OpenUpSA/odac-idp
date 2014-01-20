@@ -12,17 +12,12 @@
 </head>
 <body>
 
-<!--<div class="banner">-->
-<!--<a href="/"><img id="logo" src="/static/images/odac-logo.gif"></a>-->
-<!--<div id="banner-hr"></div>-->
-<!--</div>-->
-
 <div id="page-container" class="container">
     {% block page %}
     <div class="row">
         <h1>ODAC - IDP app</h1>
         <p class="lead">
-            What is the govenrnment planning near you?
+            What is the government planning near you?
         </p>
         <hr>
     </div>
@@ -52,8 +47,29 @@
 {% endblock %}
 
 </body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script>
+<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="/static/capesean-mapper/mapper.js" type="text/javascript"></script>
+<script src="/static/ward-info.js" type="text/javascript"></script>
 {% block javascript %}
+<script>
+    $(document).ready(function(){
+
+        $("#map-container").mapper({
+            dataType: "wards",
+            drawAll: false,
+            data: wards,
+            province: "Western Cape",
+            click: function (event) {
+                alert("I was clicked!\n"
+                        + "I am: " + this.id + "\n"
+                        + "I am one of the: " + this.dataType + "\n"
+                        + "The time of the clicking was: " + (new Date()).toString());
+            }
+        })
+    });
+</script>
 {% endblock %}
 </html>
