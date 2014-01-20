@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import render_template
 
-app = Flask("ODAC - IDP")
+app = Flask("ODAC - IDP", instance_relative_config=True)
+app.config.from_pyfile('config.py', silent=True)
 
 @app.route('/')
 def root():
