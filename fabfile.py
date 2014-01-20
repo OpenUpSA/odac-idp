@@ -70,19 +70,19 @@ def deploy():
             sudo('mkdir -p /var/www/odac-idp')
 
     # create a tarball of our package
-    local('tar -czf tmp.tar.gz app/', capture=False)
+    local('tar -czf frontend.tar.gz frontend/', capture=False)
 
     # upload the source tarball to the temporary folder on the server
-    put('tmp.tar.gz', '/tmp/tmp.tar.gz')
+    put('frontend.tar.gz', '/tmp/frontend.tar.gz')
 
     # enter application directory
     with cd('/var/www/odac-idp'):
         # and unzip new files
-        sudo('tar xzf /tmp/tmp.tar.gz')
+        sudo('tar xzf /tmp/frontend.tar.gz')
 
     # now that all is set up, delete the tarball again
-    sudo('rm /tmp/tmp.tar.gz')
-    local('rm tmp.tar.gz')
+    sudo('rm /tmp/frontend.tar.gz')
+    local('rm frontend.tar.gz')
 
     sudo('touch /var/www/odac-idp/frontend/uwsgi.sock')
 
@@ -141,8 +141,10 @@ def configure():
     sudo('chown -R www-data:www-data /var/www/odac-idp')
 
     # upload flask config
+    with settings(warn_only=True):
+        sudo('mkdir /var/www/odac-idp/instance')
     put(env['config_dir'] + '/config.py', '/tmp/config.py')
-    sudo('mv /tmp/config_frontend.py /var/www/odac-idp/instance/config.py')
+    sudo('mv /tmp/config.py /var/www/odac-idp/instance/config.py')
 
     restart()
     return
