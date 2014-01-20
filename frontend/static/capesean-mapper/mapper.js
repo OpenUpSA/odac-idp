@@ -153,7 +153,12 @@ $(function () {
             this._getBounds(data);
 
             // setup map
-            var mapOptions = { zoom: 0, center: new google.maps.LatLng(0, 0), mapTypeId: google.maps.MapTypeId.TERRAIN };
+            var mapOptions = {
+                zoom: 0,
+                center: new google.maps.LatLng(0, 0),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scrollwheel: false
+            };
             var map = new google.maps.Map(this.element[0], mapOptions),
                 bounds = new google.maps.LatLngBounds();
 
