@@ -7,7 +7,7 @@ $(function () {
     $.widget("capesean.mapper", {
         // default options
         options: {
-            fillColor: "#eee",
+            fillColor: "rgb(248,92,92)",
             fillOpacity: 0.5,
             strokeColor: "#000",
             strokeWeight: 1,
@@ -207,6 +207,14 @@ $(function () {
                     if (this.options.click) {
                         google.maps.event.addListener(polygon, 'click', this.options.click); // function(event)
                     }
+
+                    // change opacity on mouseover & revert it on mouseout
+                    google.maps.event.addListener(polygon, 'mouseover', function(event){
+                        this.setOptions({fillOpacity: 0.8});
+                    });
+                    google.maps.event.addListener(polygon, 'mouseout', function(event){
+                        this.setOptions({fillOpacity: 0.5});
+                    });
                 }
             }
 
