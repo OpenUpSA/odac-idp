@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}ODAC - IDP demo{% endblock %}</title>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+
+<!--<div class="banner">-->
+<!--<a href="/"><img id="logo" src="/static/images/odac-logo.gif"></a>-->
+<!--<div id="banner-hr"></div>-->
+<!--</div>-->
+
+<div id="page-container" class="container">
+    {% block page %}
+    <div class="row">
+        <h1>ODAC - IDP app</h1>
+        <p class="lead">
+            What is the govenrnment planning near you?
+        </p>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+
+        </div>
+        <div class="col-lg-8">
+            <div id="map-container">
+            </div>
+
+        </div>
+    </div>
+
+    {% endblock %}
+</div>
+
+{% block page_footer %}
+<div class="container" id="footer">
+    <div class="col-lg-12 text-center">
+        <hr>
+        <a class="tiny-logo" href="http://www.code4sa.org/"><img id="logo-code4sa" src="/static/images/code4sa-logo-small.png"></a>
+        <a class="tiny-logo" href="http://www.opendemocracy.org.za/"><img id="logo-odac" src="/static/images/odac-logo-small.gif"></a>
+        <p id="copyright"><small>Copyright &copy; Open Democracy Advice Centre 2014</small></p>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+{% block javascript %}
+{% endblock %}
+</html>

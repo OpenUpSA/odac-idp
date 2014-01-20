@@ -1,0 +1,23 @@
+#footer{
+    height: 100px;
+}
+
+.tiny-logo{
+    float: right;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+#logo-odac{
+    margin-top: 5px;
+}
+
+#copyright{
+    padding-top: 10px;
+}
+
+#map-container{
+    width: 600px;
+    height: 400px;
+    background-color: #eee;
+}
