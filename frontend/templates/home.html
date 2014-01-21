@@ -23,21 +23,26 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-
-
             <div class="row">
                 <div class="col-lg-8">
                     <div id="ward-title">
-
-                    </div>
-                    <div id="ward-info">
                         <p class="lead" style="padding-top: 50px;">
                             Select your ward on the map to see what's going on.
                         </p>
                     </div>
+                    <ul class="list-unstyled" id="ward-info">
+                    </ul>
                 </div>
                 <div class="col-lg-4">
-                    <div id="councillor-info" class="text-center">
+                    <div id="profile-pic" class="text-center">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="ward-description">
 
                     </div>
                 </div>
@@ -96,11 +101,20 @@
     }
 
     function show_councillor(data){
-        var container = $("#councillor-info")
-        var tmp = '<img class="profile-pic" src="static/councillors/' + data.image + '">' +
-                '<p><strong>Councillor ' + data.name + '</strong></p>'
-        container.html(tmp)
+        var profile_pic = $("#profile-pic")
+        var tmp = '<img class="profile-pic" src="static/councillors/' + data.image + '">'
+        profile_pic.html(tmp)
 
+        var info = $("#ward-info")
+        var tmp = '<li><strong>Councillor ' + data.name + ' (' + data.party + ')</strong></li>'
+        if(data.cellphone)
+            tmp += '<li><strong>Telephone:</strong> ' + data.cellphone + '</li>'
+        if(data.address)
+            tmp += '<li><strong>Address:</strong> ' + data.address + '</li>'
+        if(data.email)
+            tmp += '<li><strong>Email:</strong> ' + data.email + '</li>'
+
+        info.html(tmp)
     }
 
     $(document).ready(function(){
@@ -113,8 +127,9 @@
             click: function (event) {
                 var tmp = "<h3>Ward No. " + this.ward_no + "</h3>"
                 $("#ward-title").html(tmp)
-                var tmp = "<p>" + this.description + "</p>"
-                $("#ward-info").html(tmp)
+                var tmp = '<h4>Area description</h4>' +
+                        "<p>" + this.description + "</p>"
+                $("#ward-description").html(tmp)
 
                 tmp = $.getJSON("/" + this.id + "/", function(data){
                     list_projects(data.projects)
