@@ -146,9 +146,11 @@ def configure():
     put(env['config_dir'] + '/config.py', '/tmp/config.py')
     sudo('mv /tmp/config.py /var/www/odac-idp/instance/config.py')
 
-    # upload budget data file
+    # upload data files
     put('instance/data_budget.json', '/tmp/data_budget.json')
     sudo('mv /tmp/data_budget.json /var/www/odac-idp/instance/data_budget.json')
+    put('instance/data_councillors.json', '/tmp/data_councillors.json')
+    sudo('mv /tmp/data_councillors.json /var/www/odac-idp/instance/data_councillors.json')
 
     restart()
     return

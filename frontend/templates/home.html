@@ -23,18 +23,36 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <div id="info-box">
-                <p class="lead">
-                    Select your ward on the map to see what's going on.
-                </p>
 
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div id="ward-title">
+
+                    </div>
+                    <div id="ward-info">
+                        <p class="lead" style="padding-top: 50px;">
+                            Select your ward on the map to see what's going on.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div id="councillor-info" class="text-center">
+
+                    </div>
+                </div>
             </div>
-            <div id="project-list">
 
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="project-list">
+
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-lg-6">
-            <div id="map-container" class="pull-right">
+            <div id="map-container" class="pull-left">
             </div>
         </div>
     </div>
@@ -77,6 +95,14 @@
         }
     }
 
+    function show_councillor(data){
+        var container = $("#councillor-info")
+        var tmp = '<img class="profile-pic" src="static/councillors/' + data.image + '">' +
+                '<p><strong>Councillor ' + data.name + '</strong></p>'
+        container.html(tmp)
+
+    }
+
     $(document).ready(function(){
 
         $("#map-container").mapper({
@@ -85,14 +111,14 @@
             data: wards,
             province: "Western Cape",
             click: function (event) {
-                var tmp =
-                        "<h3>Ward No. " + this.ward_no + "</h3>"
-                        + "<h4>Councillor: " + this.councillor + "</h4>"
-                        + "<p>" + this.description + "</p>"
-                $("#info-box").html(tmp)
+                var tmp = "<h3>Ward No. " + this.ward_no + "</h3>"
+                $("#ward-title").html(tmp)
+                var tmp = "<p>" + this.description + "</p>"
+                $("#ward-info").html(tmp)
 
                 tmp = $.getJSON("/" + this.id + "/", function(data){
-                    list_projects(data)
+                    list_projects(data.projects)
+                    show_councillor(data.councillor)
                 })
             }
         })
