@@ -8,9 +8,9 @@ $(function () {
         // default options
         options: {
             fillColor: "rgb(248,92,92)",
-            fillOpacity: 0.5,
+            fillOpacity: 0.3,
             strokeColor: "#000",
-            strokeWeight: 1,
+            strokeWeight: 0.3,
             strokeOpacity: 0.7,
             data: [],
             dataType: "",
@@ -218,10 +218,10 @@ $(function () {
 
                     // change opacity on mouseover & revert it on mouseout
                     google.maps.event.addListener(polygon, 'mouseover', function(event){
-                        this.setOptions({fillOpacity: 0.8});
+                        this.setOptions({fillOpacity: 0.6});
                     });
                     google.maps.event.addListener(polygon, 'mouseout', function(event){
-                        this.setOptions({fillOpacity: 0.5});
+                        this.setOptions({fillOpacity: 0.3});
                     });
                 }
             }
