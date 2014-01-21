@@ -26,6 +26,9 @@
             <div id="info-box">
 
             </div>
+            <div id="project-list">
+
+            </div>
         </div>
         <div class="col-lg-8">
             <div id="map-container">
@@ -57,6 +60,21 @@
 <script src="/static/ward-info.js" type="text/javascript"></script>
 {% block javascript %}
 <script>
+
+    function list_projects(data){
+        var project_list = $("#project-list")
+        project_list.html("<h4>City council projects</h4>")
+        for (var i = 0; i < data.length; i++)
+        {
+            var item = '<div class="project-item">' +
+                    '<strong class="pull-right">' + data[i].cost + '</strong>' +
+                    data[i].name + " (" + data[i].department + ")<br>" +
+                    data[i].description +
+                    "</div>"
+            project_list.append(item)
+        }
+    }
+
     $(document).ready(function(){
 
         $("#map-container").mapper({
@@ -66,10 +84,14 @@
             province: "Western Cape",
             click: function (event) {
                 var tmp =
-                        "<h4>Ward No. " + this.ward_no + "</h4>"
-                        + "<p><strong>Councillor: " + this.councillor + "</strong><br>"
-                        + this.description + "</p>"
+                        "<h3>Ward No. " + this.ward_no + "</h3>"
+                        + "<h4>Councillor: " + this.councillor + "</h4>"
+                        + "<p>" + this.description + "</p>"
                 $("#info-box").html(tmp)
+
+                tmp = $.getJSON("/" + this.id + "/", function(data){
+                    list_projects(data)
+                })
             }
         })
     });

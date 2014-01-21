@@ -25,3 +25,8 @@ body{
     height: 400px;
     background-color: #eee;
 }
+
+.project-item{
+    width: 100%;
+    padding-bottom: 10px;
+}

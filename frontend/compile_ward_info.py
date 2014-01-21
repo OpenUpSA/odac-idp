@@ -10,12 +10,12 @@ import simplejson
 
 def number_to_id(ward_no):
 
-    tmp = str(ward_no)
-    if len(tmp) == 1:
-        tmp = "00" + tmp
+    ward_no = str(ward_no)
+    if len(ward_no) == 1:
+        tmp = "00" + ward_no
     elif len(tmp) == 2:
-        tmp = "0" + tmp
-    return "19100" + tmp
+        tmp = "0" + ward_no
+    return "19100" + ward_no
 
 
 f = open('ward_info.txt', 'r')
