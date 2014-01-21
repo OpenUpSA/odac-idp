@@ -154,8 +154,8 @@ $(function () {
 
             // setup map
             var mapOptions = {
-                zoom: 0,
-                center: new google.maps.LatLng(0, 0),
+                zoom: 9,
+                center: new google.maps.LatLng(-33.9694, 18.5972),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 scrollwheel: false
             };
@@ -227,7 +227,7 @@ $(function () {
             }
 
             // zoom to fit the bounds
-            map.fitBounds(bounds);
+//            map.fitBounds(bounds);
         }
     });
 });
