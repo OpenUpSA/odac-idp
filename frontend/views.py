@@ -7,8 +7,8 @@ def root():
 
     return render_template('home.html')
 
-f = open('data_budget.json', 'r')
-data_budget = simplejson.loads(f.read())
+with app.open_instance_resource('data_budget.json') as f:
+    data_budget = simplejson.loads(f.read())
 
 @app.route('/<ward_id>/')
 def get_data(ward_id):

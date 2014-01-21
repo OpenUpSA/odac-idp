@@ -49,5 +49,5 @@ for project in tmp:
 
 print len(projects_by_ward)
 
-f = open('../data_budget.json', 'w')
+f = open('../instance/data_budget.json', 'w')
 f.write(simplejson.dumps(projects_by_ward, indent=4))
