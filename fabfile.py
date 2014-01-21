@@ -7,7 +7,8 @@ def staging():
     Env parameters for the staging environment.
     """
 
-    env.hosts = ['ec2-54-194-218-89.eu-west-1.compute.amazonaws.com']
+    # env.hosts = ['ec2-54-194-218-89.eu-west-1.compute.amazonaws.com']
+    env.hosts = ['54.229.255.34']
     env.envname = 'staging'
     env.user = 'ubuntu'
     env.group = 'ubuntu'
