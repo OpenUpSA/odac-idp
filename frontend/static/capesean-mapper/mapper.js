@@ -8,7 +8,7 @@ $(function () {
         // default options
         options: {
             fillColor: "rgb(248,92,92)",
-            fillOpacity: 0,
+            fillOpacity: 0.3,
             strokeColor: "#000",
             strokeWeight: 0.3,
             strokeOpacity: 0.7,
@@ -42,7 +42,7 @@ $(function () {
                 case "wards":
                     // province filter not supplied
                     if (!this.options.province)
-                    // error if not specifically requesting full wards file
+                        // error if not specifically requesting full wards file
                         if (!this.options.allowAllWards)
                             throw ("Error: Ward dataType requires either the province filter or the allowAllWards option enabled");
                         else
@@ -157,8 +157,7 @@ $(function () {
                 zoom: 9,
                 center: new google.maps.LatLng(-33.9694, 18.5972),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-//                scrollwheel: false
-                disableDefaultUI: true
+                scrollwheel: false
             };
             var map = new google.maps.Map(this.element[0], mapOptions),
                 bounds = new google.maps.LatLngBounds();
@@ -219,16 +218,10 @@ $(function () {
 
                     // change opacity on mouseover & revert it on mouseout
                     google.maps.event.addListener(polygon, 'mouseover', function(event){
-                        this.setOptions({
-                            fillOpacity: 0.6,
-                            strokeWeight: 0.9
-                        });
+                        this.setOptions({fillOpacity: 0.6});
                     });
                     google.maps.event.addListener(polygon, 'mouseout', function(event){
-                        this.setOptions({
-                            fillOpacity: 0,
-                            strokeWeight: 0.3
-                        });
+                        this.setOptions({fillOpacity: 0.3});
                     });
                 }
             }
