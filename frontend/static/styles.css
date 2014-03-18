@@ -34,3 +34,8 @@ body{
 .profile-pic{
     padding-top: 15px;
 }
+
+#tagline{
+    margin-top: -50px;
+    margin-left: 100px;
+}

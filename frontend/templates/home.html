@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}ODAC - IDP demo{% endblock %}</title>
+    <title>{% block title %}iNeighbourhood demo{% endblock %}</title>
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
@@ -15,11 +15,15 @@
 <div id="page-container" class="container">
     {% block page %}
     <div class="row">
-        <h1>ODAC - IDP app</h1>
-        <p class="lead">
+        <img src="/static/images/ineighbourhood.png" />
+        <p id="tagline" class="lead">
             What is the government planning near you?
         </p>
         <hr>
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            This is only a demo application. The data that is shown may be incomplete, or out of date
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-6">
