@@ -1,5 +1,6 @@
 body{
-    background-image: url('/static/patterns/cream_pixels_smooth.png');
+    /*background-image: url('/static/patterns/cream_pixels_smooth.png');*/
+    background-color: #f6f6f6;
 }
 
 #footer{
@@ -26,16 +27,22 @@ body{
     background-color: #eee;
 }
 
-.project-item{
-    width: 100%;
-    padding-bottom: 10px;
-}
-
-.profile-pic{
-    padding-top: 15px;
-}
-
 #tagline{
     margin-top: -50px;
     margin-left: 100px;
+}
+
+.project-list th{
+    text-transform: uppercase;
+}
+
+.speech-bubble{
+    background-image: url(/static/images/bubble.png);
+    background-repeat: no-repeat;
+    height: 154px;
+    width: 315px;
+    margin-right: -25px;
+    padding: 25px;
+    text-align: center;
+    color: #ffffff;
 }
