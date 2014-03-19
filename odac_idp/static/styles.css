@@ -1,0 +1,48 @@
+body{
+    /*background-image: url('/static/patterns/cream_pixels_smooth.png');*/
+    background-color: #f6f6f6;
+}
+
+#footer{
+    height: 100px;
+}
+
+.tiny-logo{
+    float: right;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+#logo-odac{
+    margin-top: 5px;
+}
+
+#copyright{
+    padding-top: 10px;
+}
+
+#map-container{
+    width: 500px;
+    height: 500px;
+    background-color: #eee;
+}
+
+#tagline{
+    margin-top: -50px;
+    margin-left: 100px;
+}
+
+.project-list th{
+    text-transform: uppercase;
+}
+
+.speech-bubble{
+    background-image: url(/static/images/bubble.png);
+    background-repeat: no-repeat;
+    height: 154px;
+    width: 315px;
+    margin-right: -25px;
+    padding: 25px;
+    text-align: center;
+    color: #ffffff;
+}
