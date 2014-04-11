@@ -157,7 +157,8 @@ $(function () {
                 zoom: 9,
                 center: new google.maps.LatLng(-33.9694, 18.5972),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-                scrollwheel: false
+                scrollwheel: false,
+                streetViewControl: false
             };
             var map = new google.maps.Map(this.element[0], mapOptions),
                 bounds = new google.maps.LatLngBounds();
