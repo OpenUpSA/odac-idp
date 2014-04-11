@@ -41,6 +41,8 @@
 
             <div class="row">
                 <div class="col-lg-12">
+                    <div id="brochure-link" class="text-center">
+                    </div>
                     <div id="ward-info">
                         <h3 style="padding-top: 50px;">How to use</h3>
                         <p>
@@ -156,6 +158,14 @@
 
     $(document).ready(function(){
 
+        var brochures = {
+            13: 'Ward-13_Delft.pdf',
+            42: 'Ward-42_Gugulethu.pdf',
+            92: 'Ward-92_Kayelitsha.pdf',
+            94: 'Ward-94_Kayelitsha.pdf',
+            106: 'Ward-106_Delft-South.pdf'
+        }
+
         $("#map-container").mapper({
             dataType: "wards",
             drawAll: false,
@@ -164,7 +174,18 @@
             click: function (event) {
                 var tmp = '<div class="speech-bubble"><h1>Ward No. ' + this.ward_no + '</h1></div>'
                 $("#ward-title").html(tmp)
-                var tmp = '<h4>Area description</h4>' +
+
+                if(brochures.hasOwnProperty(this.ward_no))
+                {
+                    tmp = '<p style="margin-top: 20px;">' +
+                            '<a class="btn btn-success btn-lg" href="/static/brochure/' + brochures[this.ward_no] + '" target="_blank">' +
+                            'Download PDF summary' +
+                            '</a>' +
+                            '</p>'
+                    $("#brochure-link").html(tmp)
+                }
+
+                tmp = '<h4>Area description</h4>' +
                         "<p>" + this.description + "</p>"
                 $("#ward-description").html(tmp)
 
