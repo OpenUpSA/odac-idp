@@ -55,7 +55,8 @@ def setup():
     sudo('apt-get install nginx')
     # restart nginx after reboot
     sudo('update-rc.d nginx defaults')
-    sudo('service nginx start')
+    with settings(warn_only=True):
+        sudo('service nginx start')
     return
 
 
@@ -108,9 +109,6 @@ def deploy():
 
     # upload the source tarball to the temporary folder on the server
     put('odac_idp.tar.gz', '/tmp/odac_idp.tar.gz')
-
-    with settings(warn_only=True):
-        sudo('service nginx stop')
 
     # enter application directory
     with cd(env.project_dir):
