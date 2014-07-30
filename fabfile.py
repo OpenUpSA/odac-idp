@@ -71,10 +71,11 @@ def configure():
 
     # upload nginx server blocks (virtualhost)
     put(env.config_dir + '/nginx.conf', '/tmp/nginx.conf')
-    sudo('mv /tmp/nginx.conf %s/nginx_odac_idp.conf' % env.project_dir)
+    sudo('mv /tmp/nginx.conf %s/idp.code4sa.org.conf' % env.project_dir)
 
     with settings(warn_only=True):
-        sudo('ln -s %s/nginx_odac_idp.conf /etc/nginx/conf.d/' % env.project_dir)
+        sudo('ln -s %s/idp.code4sa.org.conf /etc/nginx/sites-available/' % env.project_dir)
+        sudo('ln -s /etc/nginx/sites-available/idp.code4sa.org.conf /etc/nginx/sites-enabled/')
 
     # upload supervisor config
     put(env.config_dir + '/supervisor.conf', '/tmp/supervisor.conf')
