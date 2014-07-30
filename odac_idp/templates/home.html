@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title %}iNeighbourhood demo{% endblock %}</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles.css">
+
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+
+<div id="page-container" class="container">
+  {% block page %}
+
+  <div class="row row-fluid">
+    <img src="/static/images/ineighbourhood.png" />
+    <p id="tagline" class="lead">
+      What is the government planning near you?
+    </p>
+    <hr>
+    <div class="alert alert-info alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      This is only a demo application. The data that is shown may be incomplete, or out of date
+    </div>
+  </div>
+
+  <div class="row row-fluid">
+
+    <div class="col-sm-6">
+
+      <div class="row row-fluid">
+        <div class="col-sm-7">
+          <div id="ward-title">
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div id="profile-pic" class="text-center"></div>
+        </div>
+      </div>
+
+      <div id="brochure-link" class="text-center">
+      </div>
+      <div id="ward-info">
+        <h3 style="padding-top: 50px;">How to use</h3>
+        <p>
+          On the map to the right, click on your ward to find a list of the big projects
+          planned, as well as the contact details of your ward councilor. Some wards also
+          have a downloadable summary for the area.
+        </p>
+
+        <h3>About</h3>
+        <p>
+          This website was created by the Open Democracy Advice Centre (and built by
+          <a href="http://www.code4sa.org/" target="_blank">Code for South Africa</a>), with the generous funding of the Foundation for Human
+          Rights. It was created to demonstrate in an easy to use way the big projects
+          planned for the different wards within Cape Town that came from the integrated
+          development planning process.
+        </p>
+
+        <h3>For further information</h3>
+        <p>You can find out more about the project, and the
+          <a href="http://opendemocracy.org.za/index.php/what-we-do/access-to-information/fhr-idp-project" target="_blank">Open Democracy Advice Centre</a>,
+          at our website.
+        </p>
+        <p>
+          Download a summary of the City of Cape Town’s integrated development plan
+          <a href="http://www.capetown.gov.za/en/IDP/Documents/idp_summary_2012-2017.pdf" target="_blank">here</a>.
+        </p>
+      </div>
+      <div id="ward-description">
+      </div>
+
+      <div class="row row-fluid">
+        <div id="project-list"></div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+      <div id="map-container" class="pull-left"></div>
+    </div>
+
+  </div>
+
+  {% endblock %}
+</div>
+
+{% block page_footer %}
+<div class="container" id="footer">
+  <div class="col-sm-12 text-center">
+    <hr>
+    <a class="tiny-logo" href="http://www.code4sa.org/"><img id="logo-code4sa" src="/static/images/code4sa-logo-small.png"></a>
+    <a class="tiny-logo" href="http://www.opendemocracy.org.za/"><img id="logo-odac" src="/static/images/odac-logo-small.gif"></a>
+    <p id="copyright"><small>Copyright &copy; Open Democracy Advice Centre 2014</small></p>
+  </div>
+</div>
+{% endblock %}
+
+</body>
+<script src="//code.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script>
+<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="/static/capesean-mapper/mapper.js" type="text/javascript"></script>
+<script src="/static/ward-info.js" type="text/javascript"></script>
+{% block javascript %}
+<script>
+
+  function list_projects(data){
+    var project_list = $("#project-list")
+    var tmp = '<table class="project-list table table-striped table-bordered">' +
+        '<thead><th>Department/Description</th><th class="text-right">Amount</th></thead>'
+    '<tbody>'
+    for (var i = 0; i < data.length; i++)
+    {
+      var item = '<tr class="project-item"><td>' +
+          data[i].name + " - " + data[i].department + "<br>" +
+          data[i].description + '</td><td class="text-right">' +
+          data[i].cost +
+          "</td></tr>"
+      tmp += item
+    }
+    tmp += ('</tbody></table>')
+    project_list.html('<hr>' + tmp)
+  }
+
+  function show_councillor(data){
+    var profile_pic = $("#profile-pic")
+    if(data.image != "no_councillor_as_yet_..jpg")
+    {
+      var tmp = '<img class="profile-pic img-circle" src="static/councillors/' + data.image + '">'
+      profile_pic.html(tmp)
+    }
+    else{
+      profile_pic.html('<p style="padding-top: 50px;">No picture available.</p>')
+    }
+
+    var info = $("#ward-info")
+    var tmp = '<hr><h4>Councillor ' + data.name + ' (' + data.party + ')</h4>' +
+        '<ul class="list-unstyled">'
+    if(data.cellphone)
+      tmp += '<li><strong>Telephone:</strong> ' + data.cellphone + '</li>'
+    if(data.address)
+      tmp += '<li><strong>Address:</strong> ' + data.address + '</li>'
+    if(data.email)
+      tmp += '<li><strong>Email:</strong> ' + data.email + '</li>'
+    tmp += '</ul>'
+    info.html(tmp + '<hr>')
+  }
+
+  $(document).ready(function(){
+
+    var brochures = {
+      13: 'Ward-13_Delft.pdf',
+      42: 'Ward-42_Gugulethu.pdf',
+      92: 'Ward-92_Kayelitsha.pdf',
+      94: 'Ward-94_Kayelitsha.pdf',
+      106: 'Ward-106_Delft-South.pdf'
+    }
+
+    $("#map-container").mapper({
+      dataType: "wards",
+      drawAll: false,
+      data: wards,
+      province: "Western Cape",
+      click: function (event) {
+        var tmp = '<div class="speech-bubble"><h1>Ward No. ' + this.ward_no + '</h1></div>'
+        $("#ward-title").html(tmp)
+
+        if(brochures.hasOwnProperty(this.ward_no))
+        {
+          tmp = '<p style="margin-top: 20px;">' +
+              '<a class="btn btn-success btn-lg" href="/static/brochure/' + brochures[this.ward_no] + '" target="_blank">' +
+              'Download PDF summary' +
+              '</a>' +
+              '</p>'
+          $("#brochure-link").html(tmp)
+        }
+
+        tmp = '<h4>Area description</h4>' +
+            "<p>" + this.description + "</p>"
+        $("#ward-description").html(tmp)
+
+        tmp = $.getJSON("/" + this.id + "/", function(data){
+          list_projects(data.projects)
+          show_councillor(data.councillor)
+        })
+      }
+    })
+  });
+</script>
+{% endblock %}
+</html>

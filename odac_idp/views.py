@@ -1,5 +1,5 @@
 from flask import render_template
-from frontend import app
+from odac_idp import app
 import simplejson
 
 @app.route('/')
