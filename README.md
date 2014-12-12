@@ -3,7 +3,7 @@ odac-idp
 
 Demo web application for accessing information contained in the government's numerous Integrated Development Plans.
 
-The demo can be found at: http://odac-idp.demo4sa.org/
+The demo can be found at: http://idp.code4sa.org/
 
 
 ## What does this project do
@@ -35,7 +35,9 @@ To run this application in your local environment, use the builtin Flask dev-ser
 Navigate into the application folder and install the required Python packages:
 
     cd odac_idp
-    sudo pip install -r requirements/local.txt
+    virtualenv --no-site-packages env
+    source env/bin/activate
+    pip install -r requirements.txt
 
 Run the Flask dev server:
 
@@ -45,35 +47,8 @@ The frontend application should now be running at http://localhost:5000.
 
 ### Deploy instructions
 
-To deploy this application to an Ubuntu 12.04 instance, which you can access via SSH:
+This application runs on Heroku. To deploy, just use `git push heroku`.
 
-Install the 'fabric' package for interacting with servers via ssh:
+When setting up on Heroku, be sure to set the environment variables:
 
-    sudo pip install fabric
-
-Set up the relevant config paramenters for your server in `fabdefs.py`.
-
-Navigate into the application folder and run the server setup and deploy scripts:
-
-    cd odac_idp
-    fab <server_name> setup
-    fab <server_name> deploy
-    fab <server_name> configure
-
-More details about setup and deployment can be found in `fabfile.py`, the script that fabric runs during deployment.
-
-### Maintenance
-
-Logs can be found at:
-
-* Flask:
-
-        /path/to/project_dir/debug.log
-
-* Nginx:
-
-        /var/log/nginx/error.log
-        /var/log/nginx/access.log
-
-* Supervisor
-        /var/log/supervisor/odac_idp.log
+    FLASK_ENV=production

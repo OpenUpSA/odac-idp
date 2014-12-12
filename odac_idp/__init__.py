@@ -1,6 +1,10 @@
+import os
 from flask import Flask
 
-app = Flask(__name__, instance_relative_config=True)
-app.config.from_pyfile('config.py', silent=True)
+# setup configs
+env = os.environ.get('FLASK_ENV', 'development')
+
+app = Flask(__name__)
+app.config['DEBUG'] = (env != 'production')
 
 import odac_idp.views
